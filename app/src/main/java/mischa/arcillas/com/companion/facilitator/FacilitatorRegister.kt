@@ -1,26 +1,43 @@
 package mischa.arcillas.com.companion.facilitator
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_facilitator_register.*
-import kotlinx.android.synthetic.main.activity_seeker_register.*
 import mischa.arcillas.com.companion.R
+import org.jetbrains.anko.fingerprintManager
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FacilitatorRegister : AppCompatActivity() {
+
+    val SELECT_PHOTO = 1
+
+    var fnameFaci: EditText ?= null
+    var lnameFaci: EditText ?= null
+    var emailFaci: EditText ?= null
+    var usernameFaci: EditText ?= null
+    var passwordFaci: EditText ?= null
+    var confirmFaci: EditText ?= null
+    var birthdayFaci: EditText ?= null
+    var genderFaci: Spinner ?= null
+    var prcPhoto: TextView ?= null
+
+
 
     private val myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_facilitator_register)
+
+        findview()
 
         val birthDate = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
@@ -47,21 +64,28 @@ class FacilitatorRegister : AppCompatActivity() {
         }
         tempFaci = spinnerGenderFaci.selectedItem.toString()
 
-        btnNextFaci.setOnClickListener {
-            if (!(edtFnameFaci.text.isEmpty() && edtLnameFaci.text.isEmpty() && edtEmailFaci.text.isEmpty() && edtUsernameFaci.text.isEmpty() && edtPasswordFaci.text.isEmpty()
-                            && edtConfirmFaci.text.isEmpty() && edtBirthdayFaci.text.isEmpty())) {
+        btnAddImage.setOnClickListener {
+            dispatchGalleryIntent()
+        }
+
+
+
+        btnInterests.setOnClickListener {
+          /*  if (!(edtFnameFaci.text.isEmpty() && edtLnameFaci.text.isEmpty() && edtEmailFaci.text.isEmpty() && edtUsernameFaci.text.isEmpty() && edtPasswordFaci.text.isEmpty()
+                            && edtConfirmFaci.text.isEmpty() && edtBirthdayFaci.text.isEmpty())) {*/
                 val userTypeFaci = "facilitator"
-                val fnameFaci = edtFnameFaci.text.toString()
-                val lnameFaci = edtLnameFaci.text.toString()
-                val emailFaci = edtEmailFaci.text.toString()
-                val usernameFaci = edtUsernameFaci.text.toString()
-                val passwordFaci = edtPasswordFaci.text.toString()
-                val confirmFaci = edtConfirmFaci.text.toString()
-                val bdayFaci = edtBirthdayFaci.text.toString()
+                val fnameFaci = fnameFaci?.text.toString()
+                val lnameFaci = lnameFaci?.text.toString()
+                val emailFaci = emailFaci?.text.toString()
+                val usernameFaci = usernameFaci?.text.toString()
+                val passwordFaci = passwordFaci?.text.toString()
+                val confirmFaci = confirmFaci?.text.toString()
+                val bdayFaci = birthdayFaci?.text.toString()
                 val genderFaci = tempFaci
+                val prcPhoto = prcPhoto?.text.toString()
 
                 val intent = Intent(this, FacilitatorInterests::class.java)
-                intent.putExtra("userTypeFaci", userTypeFaci)
+                intent.putExtra("userType", userTypeFaci)
                 intent.putExtra("fnameFaci", fnameFaci)
                 intent.putExtra("lnameFaci", lnameFaci)
                 intent.putExtra("emailFaci", emailFaci)
@@ -70,12 +94,52 @@ class FacilitatorRegister : AppCompatActivity() {
                 intent.putExtra("confirmFaci", confirmFaci)
                 intent.putExtra("birthdayFaci", bdayFaci)
                 intent.putExtra("genderFaci", genderFaci)
+                intent.putExtra("prcPhoto", prcPhoto)
+
                 startActivity(intent)
-            } else {
+         /*   } else {
                 Toast.makeText(this, "Fill-up everything", Toast.LENGTH_LONG).show()
+            }*/
+        }
+    }
+
+    private fun findview() {
+        fnameFaci = findViewById(R.id.edtFnameFaci)
+        lnameFaci = findViewById(R.id.edtLnameFaci)
+        emailFaci = findViewById(R.id.edtEmailFaci)
+        usernameFaci = findViewById(R.id.edtUsernameFaci)
+        passwordFaci = findViewById(R.id.edtPasswordFaci)
+        confirmFaci = findViewById(R.id.edtConfirmFaci)
+        birthdayFaci = findViewById(R.id.edtBirthdayFaci)
+        genderFaci = findViewById(R.id.spinnerGenderFaci)
+        prcPhoto = findViewById(R.id.txtPath)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == SELECT_PHOTO && resultCode == Activity.RESULT_OK){
+            val uri = data!!.data
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            try {
+                val cursor = contentResolver.query(uri, projection, null, null, null)
+                cursor.moveToFirst()
+                val columnIndex = cursor.getColumnIndex(projection[0])
+                val picturePath = cursor.getString(columnIndex)
+                cursor.close()
+                imgPrc.setImageURI(uri)
+                txtPath.text = picturePath
+            }catch (e: IOException){
+                e.printStackTrace()
             }
         }
     }
+
+    fun dispatchGalleryIntent() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Photo"), SELECT_PHOTO)
+    }
+
     private fun updateLabel() {
         val format = "MM/dd/yyyy"
         val sdf = SimpleDateFormat(format, Locale.US)

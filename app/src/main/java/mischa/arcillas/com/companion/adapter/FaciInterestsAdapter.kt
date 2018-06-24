@@ -13,7 +13,7 @@ import mischa.arcillas.com.companion.model.UserInfo
 class FaciInterestsAdapter(val interestList: InterestsData): RecyclerView.Adapter<CustomViewHolderFaci>(){
 
     companion object {
-        var tempInterest : ArrayList<String> = arrayListOf()
+        var tempInterestFaci : ArrayList<String> = arrayListOf()
     }
 
     override fun getItemCount(): Int {
@@ -32,9 +32,9 @@ class FaciInterestsAdapter(val interestList: InterestsData): RecyclerView.Adapte
 
         holder.checkInterest.setOnCheckedChangeListener { view, isChecked ->
             if(holder.view.chckInterest.isChecked){
-                tempInterest.add(interest.interestName)
+                tempInterestFaci.add(interest.interestName)
             }else{
-                tempInterest.remove(interest.interestName)
+                tempInterestFaci.remove(interest.interestName)
             }
         }
     }

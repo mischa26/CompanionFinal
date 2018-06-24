@@ -4,30 +4,22 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonIOException
 import kotlinx.android.synthetic.main.activity_seeker_interests.*
 import mischa.arcillas.com.companion.Login
 import mischa.arcillas.com.companion.R
-import mischa.arcillas.com.companion.R.id.recycler_view_main_seeker
 import mischa.arcillas.com.companion.adapter.InterestsAdapter
 import mischa.arcillas.com.companion.adapter.InterestsAdapter.Companion.tempInterest
 import mischa.arcillas.com.companion.model.InterestsData
-import mischa.arcillas.com.companion.model.InterestsSeeker
 import mischa.arcillas.com.companion.model.UserInfo
 import okhttp3.*
 import org.jetbrains.anko.doAsync
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
-import java.util.ArrayList
 
 class SeekerInterests : AppCompatActivity() {
-
-   lateinit var interstString: InterestsSeeker
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +48,10 @@ class SeekerInterests : AppCompatActivity() {
                 }*/
 
                 doAsync {
-                    val result = "http://172.17.2.51:8000/registerService"
+                    val result = "http://192.168.1.8:8000/registerService"
+                    /*val result = "http://172.17.2.51:8000/registerService"*/
                     val mClient = OkHttpClient()
                     val jsonObj = JSONObject()
-                    /*val map = java.util.HashMap<String,MutableList<String>>()*/
 
                     jsonObj.put("userType", userType.toString())
                     jsonObj.put("fname", firstname.toString())
@@ -73,8 +65,6 @@ class SeekerInterests : AppCompatActivity() {
 
                     val interestsArr = JSONArray()
 
-
-                   // map1["interest"] = tempInterest.toString()
                     tempInterest.forEach {
                         interestsArr.put(it)
                     }
@@ -107,8 +97,10 @@ class SeekerInterests : AppCompatActivity() {
         }
     }
 
-    fun fetchInterest(userInfo: UserInfo) {
-        val url = "http://172.17.2.51:8000/interests/get"
+    private fun fetchInterest(userInfo: UserInfo) {
+        val url = "http://192.168.1.8:8000/interests/get"
+        /*val url = "http://192.168.1.8:8000/interests/get"*/
+        /*val url = "http://172.17.2.51:8000/interests/get"*/
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 

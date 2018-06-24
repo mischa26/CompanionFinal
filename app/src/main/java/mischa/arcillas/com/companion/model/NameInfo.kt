@@ -1,3 +1,3 @@
 package mischa.arcillas.com.companion.model
 
-class InterestsSeeker(val interest: String)
+data class NameData(val name: String)

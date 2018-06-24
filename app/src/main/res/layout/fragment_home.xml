@@ -3,30 +3,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
+            android:id="@+id/relativePost"
             android:layout_width="match_parent"
-            android:layout_height="505dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btnTalkCircle"
-            android:layout_width="255dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button_border"
-            android:text="Talk Circle"
-            android:textColor="#000000" />
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/edtPost"
+                android:layout_width="374dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="58dp"
+                android:background="#fff"
+                android:ems="10"
+                android:hint="Post Here..."
+                android:inputType="text|textMultiLine"
+                android:padding="10dp"
+                android:textColorHint="#808080"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <Spinner
+                android:id="@+id/spinnerFeelings"
+                android:layout_width="237dp"
+                android:layout_height="38dp"
+                android:layout_alignLeft="@+id/edtPost"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/edtPost"
+                android:layout_marginTop="102dp"/>
+
+            <Button
+                android:id="@+id/btnPost"
+                android:layout_width="71dp"
+                android:layout_height="34dp"
+                android:layout_alignBottom="@+id/spinnerFeelings"
+                android:layout_toEndOf="@+id/spinnerFeelings"
+                android:layout_toRightOf="@+id/spinnerFeelings"
+                android:background="@drawable/gradientbackground"
+                android:text="Post"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
 </FrameLayout>

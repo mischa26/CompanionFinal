@@ -8,9 +8,10 @@ import android.widget.CheckBox
 import kotlinx.android.synthetic.main.interests_row.view.*
 import kotlinx.android.synthetic.main.specialization_row.view.*
 import mischa.arcillas.com.companion.R
+import mischa.arcillas.com.companion.model.FaciInfo
 import mischa.arcillas.com.companion.model.SpecializationData
 
-class SpecializationAdapter(val specList: SpecializationData): RecyclerView.Adapter<CustomViewHolderSpecialization>(){
+class SpecializationAdapter(val specList: SpecializationData, faciInfo: FaciInfo): RecyclerView.Adapter<CustomViewHolderSpecialization>(){
 
     companion object {
         var tempSpec : MutableList<String> = arrayListOf()

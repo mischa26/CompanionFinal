@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_seeker_interests.*
 import kotlinx.android.synthetic.main.interests_row.*
 import mischa.arcillas.com.companion.R
 import mischa.arcillas.com.companion.adapter.FaciInterestsAdapter
+import mischa.arcillas.com.companion.adapter.FaciInterestsAdapter.Companion.tempInterestFaci
 import mischa.arcillas.com.companion.adapter.InterestsAdapter
 import mischa.arcillas.com.companion.model.InterestsData
 import okhttp3.*
@@ -27,17 +28,21 @@ class FacilitatorInterests : AppCompatActivity() {
         fetchFaciInterests()
 
         btnNext2ndFaci.setOnClickListener {
-            val chckInterest = findViewById<CheckBox>(R.id.chckInterest)
-
             val intent = Intent(this, FacilitatorSpecialization::class.java)
-            intent.putExtra("interets", chckInterest.isChecked)
 
+            /*val interestFaci = arrayListOf<String>()
+            tempInterestFaci.forEach {
+                interestFaci.add(it)
+            }*/
+            intent.putExtra("interestsFaci", tempInterestFaci)
             startActivity(intent)
         }
     }
 
     fun fetchFaciInterests() {
-        val url = "http://172.17.2.51:8000/interests/get"
+        /*val url = "http://192.168.1.10:8000/interests/get"*/
+        val url = "http://192.168.1.8:8000/interests/get"
+        /*val url = "http://172.17.2.51:8000/interests/get"*/
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 

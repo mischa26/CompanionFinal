@@ -4,12 +4,10 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_login.*
-import mischa.arcillas.com.companion.local_db.LocalDB
 import mischa.arcillas.com.companion.local_db.LocalDatabaseHandler
+import mischa.arcillas.com.companion.local_db.UserLocal
 import mischa.arcillas.com.companion.model.Name
 import okhttp3.*
 import org.jetbrains.anko.doAsync
@@ -18,6 +16,8 @@ import org.json.JSONObject
 import java.io.IOException
 
 class Login : AppCompatActivity() {
+
+    lateinit var user: UserLocal
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +69,10 @@ class Login : AppCompatActivity() {
                         println(bodyName)
                         Log.i("hahah", body)
 
+                        val localUserDb = LocalDatabaseHandler(this@Login)
+                        localUserDb.insertData(user)
+                        user.name
+                        user.token
 
                         val i = Intent(this@Login, Home::class.java)
                         i.putExtra("name", bodyName.name)

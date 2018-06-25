@@ -8,10 +8,13 @@ import android.widget.Toast
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_login.*
-import mischa.arcillas.com.companion.model.NameData
+import mischa.arcillas.com.companion.local_db.LocalDB
+import mischa.arcillas.com.companion.local_db.LocalDatabaseHandler
+import mischa.arcillas.com.companion.model.Name
 import okhttp3.*
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
+
 import java.io.IOException
 
 class Login : AppCompatActivity() {
@@ -34,8 +37,8 @@ class Login : AppCompatActivity() {
         btnLogin2.setOnClickListener {
             doAsync {
                 /*val result = "http://192.168.1.10:8000/login"*/
-                val result = "http://192.168.1.8:8000/login"
-                /*val result = "http://172.17.2.51:8000/login"*/
+                /*val result = "http://192.168.1.8:8000/login"*/
+                val result = "http://172.17.1.133:8000/login"
                 val mClient = OkHttpClient()
                 val jsonObj = JSONObject()
 
@@ -60,63 +63,21 @@ class Login : AppCompatActivity() {
 
                     override fun onResponse(call: Call?, response: Response?) {
                         val body = response?.body()?.string()
+                        val gson = GsonBuilder().create()
+
+                        val bodyName = gson.fromJson(body, Name::class.java)
+                        println(bodyName)
                         Log.i("hahah", body)
+
+
                         val i = Intent(this@Login, Home::class.java)
-                        /*i.putExtra("username", edtUser1.text.toString())
-                        i.putExtra("password", edtpass1.text.toString())*/
+                        i.putExtra("name", bodyName.name)
+                        i.putExtra("token", bodyName.token)
                         startActivity(i)
                     }
                 })
             }
         }
-
-
-        /*//Database
-        val jsonObj = JSONObject()
-        btnLogin2.setOnClickListener {
-            jsonObj.put("username", edtUser1.text.toString())
-            jsonObj.put("password", edtpass1.text.toString())
-
-            val que = Volley.newRequestQueue(this)
-            val req = JsonObjectRequest(Request.Method.POST, url, jsonObj,
-                    Response.Listener { response ->
-                        if(response != null) {
-                            toast(response["message"].toString())
-                            val intent = Intent(this, Home::class.java)
-                            startActivity(intent)
-                        }
-                    }, Response.ErrorListener { error ->
-                *//*Log.e("lalalalalala", error.message)*//*
-                toast("Error" + error.message)
-            })
-            que.add(req)
-        }*/
-        /*private fun fetchName() {
-        doAsync {
-            val url = "http://192.168.1.8:8000/name"
-            val trequest = Request.Builder()
-                    .url(url)
-                    .header("Authorization", "token")
-                    .addHeader("Content-Type", "application/json")
-                    .build()
-            val client = OkHttpClient()
-            client.newCall(trequest).enqueue(object : Callback {
-                override fun onFailure(call: Call?, e: IOException?) {
-
-                }
-                override fun onResponse(call: Call?, response: Response?) {
-                    if(response?.body() != null) {
-                        val mbody = response.body()?.string()
-                        val gson = GsonBuilder().create()
-                        val nameUser = gson.fromJson(mbody, NameData::class.java)
-                        runOnUiThread {
-                            println(nameUser)
-                        }
-                    }
-                }
-            })
-        }
-    }*/
     }
 }
 

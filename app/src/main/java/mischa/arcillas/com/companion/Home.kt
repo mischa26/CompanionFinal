@@ -27,10 +27,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.problems_row.view.*
+import mischa.arcillas.com.companion.adapter.ProblemAdapter
 import mischa.arcillas.com.companion.fragment.ChatFragment
 import mischa.arcillas.com.companion.fragment.HomeFragment
 import mischa.arcillas.com.companion.fragment.NotifFragment
-import mischa.arcillas.com.companion.model.NameData
+import mischa.arcillas.com.companion.model.Name
 import mischa.arcillas.com.companion.model.ProblemsData
 import mischa.arcillas.com.companion.profile.Profile
 import okhttp3.*
@@ -66,8 +67,8 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                     R.id.nav_home ->
                         selectedFragment = HomeFragment.newInstance()
 
-                    R.id.nav_notif ->
-                        selectedFragment = NotifFragment.newInstance()
+                    /*R.id.nav_notif ->
+                        selectedFragment = NotifFragment.newInstance()*/
 
                     R.id.nav_chat ->
                         selectedFragment = ChatFragment.newInstance()
@@ -89,7 +90,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
            val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recycler_view_custom_problem)
             val mLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
-            val url = "http://192.168.1.8:8000/problems/get"
+            val url = "http://172.17.1.133:8000/problems/get"
             val request = Request.Builder().url(url).build()
             val client = OkHttpClient()
 
@@ -116,7 +117,13 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
             dialog.setView(dialogView)
             dialog.setCancelable(true)
-            dialog.setPositiveButton("Submit",{ _: DialogInterface, _: Int -> })
+            dialog.setPositiveButton("Submit",{ _: DialogInterface, _: Int ->
+
+            })
+
+            dialog.setNegativeButton("Cancel", {_:DialogInterface, _:Int ->
+
+            })
             val customDialog = dialog.create()
             customDialog.show()
             customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener({
@@ -130,9 +137,12 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val extra = intent.extras
+        val name_user = extra.getString("name")
+
+        txt_name_user.text = name_user
     }
-
-
 
     fun Context.toast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -176,7 +186,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         return true
     }
 
-    //ProblemAdapter
+    /*//ProblemAdapter
     class ProblemAdapter(val problemList: ProblemsData): RecyclerView.Adapter<CustomViewHolderProblems> (){
         companion object {
             var tempProblems: MutableList<String> = arrayListOf()
@@ -208,5 +218,5 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
     class CustomViewHolderProblems(val view: View): RecyclerView.ViewHolder(view) {
         val checkProblem = view.findViewById<CheckBox>(R.id.chckProblems)
-    }
+    }*/
 }

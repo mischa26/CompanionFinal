@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_seeker_interests.*
 import mischa.arcillas.com.companion.Login
@@ -48,8 +49,8 @@ class SeekerInterests : AppCompatActivity() {
                 }*/
 
                 doAsync {
-                    val result = "http://192.168.1.8:8000/registerService"
-                    /*val result = "http://172.17.2.51:8000/registerService"*/
+                    /*val result = "http://192.168.1.8:8000/registerService"*/
+                    val result = "http://172.17.1.133:8000/registerService"
                     val mClient = OkHttpClient()
                     val jsonObj = JSONObject()
 
@@ -98,9 +99,9 @@ class SeekerInterests : AppCompatActivity() {
     }
 
     private fun fetchInterest(userInfo: UserInfo) {
-        val url = "http://192.168.1.8:8000/interests/get"
-        /*val url = "http://192.168.1.8:8000/interests/get"*/
-        /*val url = "http://172.17.2.51:8000/interests/get"*/
+        /*val url = "http://192.168.1.8:8000/interests/get"
+        *//*val url = "http://192.168.1.8:8000/interests/get"*/
+        val url = "http://172.17.1.133:8000/interests/get"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 

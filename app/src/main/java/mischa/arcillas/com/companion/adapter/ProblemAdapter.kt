@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.problems_row.view.*
 import mischa.arcillas.com.companion.R
 import mischa.arcillas.com.companion.model.ProblemsData
 
-/*class ProblemAdapter(val problemList: ProblemsData): RecyclerView.Adapter<CustomViewHolderProblems> (){
+class ProblemAdapter(val problemList: ProblemsData): RecyclerView.Adapter<CustomViewHolderProblems> (){
     companion object {
         var tempProblems: MutableList<String> = arrayListOf()
     }
@@ -41,4 +41,4 @@ import mischa.arcillas.com.companion.model.ProblemsData
 
 class CustomViewHolderProblems(val view: View): RecyclerView.ViewHolder(view) {
     val checkProblem = view.findViewById<CheckBox>(R.id.chckProblems)
-}*/
+}

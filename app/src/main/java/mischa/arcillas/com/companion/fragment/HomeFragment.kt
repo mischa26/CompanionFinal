@@ -47,7 +47,6 @@ class HomeFragment : Fragment(){
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 temp =  spin.selectedItem.toString()
             }

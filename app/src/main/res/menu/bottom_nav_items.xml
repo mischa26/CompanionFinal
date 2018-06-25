@@ -7,11 +7,11 @@
         android:icon="@drawable/ic_home"
         android:iconTint="#fff"
         android:title="@string/nav_home" />
-    <item
+    <!--<item
         android:id="@+id/nav_notif"
         android:icon="@drawable/ic_notif"
         android:iconTint="#fff"
-        android:title="@string/nav_notif" />
+        android:title="@string/nav_notif" />-->
     <item
         android:id="@+id/nav_chat"
         android:icon="@drawable/ic_chat"

@@ -25,15 +25,32 @@ class FacilitatorInterests : AppCompatActivity() {
 
         recycler_view_main_faci.layoutManager = LinearLayoutManager(this)
 
+        val extras = intent.extras
+        val userTypeFaci = extras.getString("userTypeFaci")
+        val firstNameFaci = extras.getString("fnameFaci")
+        val lastNameFaci = extras.getString("lnameFaci")
+        val emailFaci = extras.getString("emailFaci")
+        val usernameFaci = extras.getString("usernameFaci")
+        val passwordFaci = extras.getString("passwordFaci")
+        val confirmFaci = extras.getString("confirmFaci")
+        val birthdayFaci = extras.getString("birthdayFaci")
+        val genderFaci = extras.getString("genderFaci")
+        val prcPhoto = extras.getString("prcPhoto")
+
         fetchFaciInterests()
 
         btnNext2ndFaci.setOnClickListener {
             val intent = Intent(this, FacilitatorSpecialization::class.java)
-
-            /*val interestFaci = arrayListOf<String>()
-            tempInterestFaci.forEach {
-                interestFaci.add(it)
-            }*/
+            intent.putExtra("userType", userTypeFaci)
+            intent.putExtra("fnameFaci", firstNameFaci)
+            intent.putExtra("lnameFaci", lastNameFaci)
+            intent.putExtra("emailFaci", emailFaci)
+            intent.putExtra("usernameFaci", usernameFaci)
+            intent.putExtra("passwordFaci", passwordFaci)
+            intent.putExtra("confirmFaci", confirmFaci)
+            intent.putExtra("birthdayFaci", birthdayFaci)
+            intent.putExtra("genderFaci", genderFaci)
+            intent.putExtra("prcPhoto", prcPhoto)
             intent.putExtra("interestsFaci", tempInterestFaci)
             startActivity(intent)
         }
@@ -41,7 +58,7 @@ class FacilitatorInterests : AppCompatActivity() {
 
     fun fetchFaciInterests() {
         /*val url = "http://192.168.1.10:8000/interests/get"*/
-        val url = "http://192.168.1.8:8000/interests/get"
+        val url = "http://172.17.2.132:8000/interests/get"
         /*val url = "http://172.17.2.51:8000/interests/get"*/
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
@@ -57,6 +74,7 @@ class FacilitatorInterests : AppCompatActivity() {
 
                 runOnUiThread {
                     recycler_view_main_faci.adapter = FaciInterestsAdapter(interest)
+                    recycler_view_main_faci.adapter.notifyDataSetChanged()
                 }
             }
             override fun onFailure(call: Call?, e: IOException?) {
@@ -64,3 +82,8 @@ class FacilitatorInterests : AppCompatActivity() {
         })
     }
 }
+
+/*val interestFaci = arrayListOf<String>()
+            tempInterestFaci.forEach {
+                interestFaci.add(it)
+   }*/

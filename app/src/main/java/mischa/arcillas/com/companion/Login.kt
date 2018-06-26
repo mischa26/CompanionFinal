@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_login.*
+import mischa.arcillas.com.companion.local_db.LocalDB
 import mischa.arcillas.com.companion.local_db.LocalDatabaseHandler
 import mischa.arcillas.com.companion.local_db.UserLocal
 import mischa.arcillas.com.companion.model.Name
@@ -17,7 +18,6 @@ import java.io.IOException
 
 class Login : AppCompatActivity() {
 
-    lateinit var user: UserLocal
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class Login : AppCompatActivity() {
             doAsync {
                 /*val result = "http://192.168.1.10:8000/login"*/
                 /*val result = "http://192.168.1.8:8000/login"*/
-                val result = "http://172.17.1.133:8000/login"
+                val result = "http://172.17.2.132:8000/login"
                 val mClient = OkHttpClient()
                 val jsonObj = JSONObject()
 
@@ -70,14 +70,18 @@ class Login : AppCompatActivity() {
                         Log.i("hahah", body)
 
                         val localUserDb = LocalDatabaseHandler(this@Login)
-                        localUserDb.insertData(user)
-                        user.name
-                        user.token
+                        localUserDb.insertData(bodyName.name, bodyName.token)
+                        val iUser = Intent(this@Login, LocalDB::class.java)
+                        iUser.putExtra("name", bodyName.name)
+                        iUser.putExtra("token", bodyName.token)
+                        startActivity(iUser)
 
                         val i = Intent(this@Login, Home::class.java)
                         i.putExtra("name", bodyName.name)
                         i.putExtra("token", bodyName.token)
                         startActivity(i)
+
+
                     }
                 })
             }

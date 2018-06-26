@@ -15,10 +15,16 @@ class LocalDB : AppCompatActivity(){
 
         btnLogin2.setOnClickListener({
             if (edtUser1.text.toString().isNotEmpty() && edtpass1.text.toString().isNotEmpty()){
-                var user = UserLocal(edtUser1.text.toString(), edtpass1.text.toString())
+                val extra = intent.extras
+                val name_db = extra.getString("name")
+                val token_db = extra.getString("token")
+
+                var db = LocalDatabaseHandler(context)
+                db.insertData(name_db, token_db)
+                /*var user = UserLocal(edtUser1.text.toString(), edtpass1.text.toString())
                 var db = LocalDatabaseHandler(context)
                 db.insertData(user)
-                println(user)
+                println(user)*/
             }else{
                 Toast.makeText(context, "Fill All Data's", Toast.LENGTH_SHORT).show()
             }

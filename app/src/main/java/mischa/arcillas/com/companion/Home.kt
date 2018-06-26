@@ -90,7 +90,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
            val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recycler_view_custom_problem)
             val mLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
-            val url = "http://172.17.1.133:8000/problems/get"
+            val url = "http://172.17.2.132:8000/problems/get"
             val request = Request.Builder().url(url).build()
             val client = OkHttpClient()
 

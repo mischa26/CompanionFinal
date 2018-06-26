@@ -101,7 +101,7 @@ class SeekerInterests : AppCompatActivity() {
     private fun fetchInterest(userInfo: UserInfo) {
         /*val url = "http://192.168.1.8:8000/interests/get"
         *//*val url = "http://192.168.1.8:8000/interests/get"*/
-        val url = "http://172.17.1.133:8000/interests/get"
+        val url = "http://172.17.2.132:8000/interests/get"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 

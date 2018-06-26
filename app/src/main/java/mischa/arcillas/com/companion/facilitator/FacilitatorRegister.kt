@@ -19,25 +19,11 @@ class FacilitatorRegister : AppCompatActivity() {
 
     val SELECT_PHOTO = 1
 
-    var fnameFaci: EditText ?= null
-    var lnameFaci: EditText ?= null
-    var emailFaci: EditText ?= null
-    var usernameFaci: EditText ?= null
-    var passwordFaci: EditText ?= null
-    var confirmFaci: EditText ?= null
-    var birthdayFaci: EditText ?= null
-    var genderFaci: Spinner ?= null
-    var prcPhoto: TextView ?= null
-
-
-
     private val myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_facilitator_register)
-
-        findview()
 
         val birthDate = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
@@ -70,19 +56,19 @@ class FacilitatorRegister : AppCompatActivity() {
 
 
 
-        btnInterests.setOnClickListener {
+        btnNextFaci.setOnClickListener {
           /*  if (!(edtFnameFaci.text.isEmpty() && edtLnameFaci.text.isEmpty() && edtEmailFaci.text.isEmpty() && edtUsernameFaci.text.isEmpty() && edtPasswordFaci.text.isEmpty()
                             && edtConfirmFaci.text.isEmpty() && edtBirthdayFaci.text.isEmpty())) {*/
                 val userTypeFaci = "facilitator"
-                val fnameFaci = fnameFaci?.text.toString()
-                val lnameFaci = lnameFaci?.text.toString()
-                val emailFaci = emailFaci?.text.toString()
-                val usernameFaci = usernameFaci?.text.toString()
-                val passwordFaci = passwordFaci?.text.toString()
-                val confirmFaci = confirmFaci?.text.toString()
-                val bdayFaci = birthdayFaci?.text.toString()
+                val fnameFaci = edtFnameFaci.text.toString()
+                val lnameFaci = edtLnameFaci.text.toString()
+                val emailFaci = edtEmailFaci.text.toString()
+                val usernameFaci = edtUsernameFaci.text.toString()
+                val passwordFaci = edtPasswordFaci.text.toString()
+                val confirmFaci = edtConfirmFaci.text.toString()
+                val bdayFaci = edtBirthdayFaci.text.toString()
                 val genderFaci = tempFaci
-                val prcPhoto = prcPhoto?.text.toString()
+                val prcPhoto = txtPath.text.toString()
 
                 val intent = Intent(this, FacilitatorInterests::class.java)
                 intent.putExtra("userType", userTypeFaci)
@@ -101,18 +87,6 @@ class FacilitatorRegister : AppCompatActivity() {
                 Toast.makeText(this, "Fill-up everything", Toast.LENGTH_LONG).show()
             }*/
         }
-    }
-
-    private fun findview() {
-        fnameFaci = findViewById(R.id.edtFnameFaci)
-        lnameFaci = findViewById(R.id.edtLnameFaci)
-        emailFaci = findViewById(R.id.edtEmailFaci)
-        usernameFaci = findViewById(R.id.edtUsernameFaci)
-        passwordFaci = findViewById(R.id.edtPasswordFaci)
-        confirmFaci = findViewById(R.id.edtConfirmFaci)
-        birthdayFaci = findViewById(R.id.edtBirthdayFaci)
-        genderFaci = findViewById(R.id.spinnerGenderFaci)
-        prcPhoto = findViewById(R.id.txtPath)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

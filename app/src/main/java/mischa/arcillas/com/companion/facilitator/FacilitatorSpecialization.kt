@@ -47,10 +47,10 @@ class FacilitatorSpecialization : AppCompatActivity() {
             val addFaci = FaciInfo("facilitator", firstNameFaci, lastNameFaci, emailFaci, usernameFaci,
                     passwordFaci, confirmFaci, birthdayFaci, genderFaci, prcPhoto, interestsFaci)
             println(firstNameFaci+" "+lastNameFaci)
-            fetchSpecialization(addFaci)
+
 
             btnSignUpFaci.setOnClickListener {
-                val extras1 = intent.extras
+                /*val extras1 = intent.extras
                 if (extras1 != null) {
                     val userTypeFaci1 = extras1.getString("userTypeFaci")
                     val firstNameFaci1 = extras1.getString("fnameFaci")
@@ -62,25 +62,25 @@ class FacilitatorSpecialization : AppCompatActivity() {
                     val birthdayFaci1 = extras1.getString("birthdayFaci")
                     val genderFaci1 = extras1.getString("genderFaci")
                     val prcPhoto1 = extras1.getString("prcPhoto")
-                    val interestsFaci1 = extras1.getStringArrayList("interestsFaci")
+                    val interestsFaci1 = extras1.getStringArrayList("interestsFaci")*/
 
                     doAsync {
-                        val result = "http://192.168.1.8:8000/registerService"
+                        val result = "http://172.17.2.132:8000/registerService"
                         /*val result = "http://172.17.2.51:8000/registerService"*/
                         val mClient = OkHttpClient()
                         val jsonObj = JSONObject()
 
                         jsonObj.put("userType","facilitator")
-                        jsonObj.put("fname", firstNameFaci1.toString())
-                        jsonObj.put("lname", lastNameFaci1.toString())
-                        jsonObj.put("email", emailFaci1.toString())
-                        jsonObj.put("username", usernameFaci1.toString())
-                        jsonObj.put("password", passwordFaci1.toString())
-                        jsonObj.put("confirm", confirmFaci1.toString())
-                        jsonObj.put("birthday", birthdayFaci1.toString())
-                        jsonObj.put("gender", genderFaci1.toString())
-                        jsonObj.put("prcPhoto", prcPhoto1.toString())
-                        jsonObj.put("interests", interestsFaci1.toString())
+                        jsonObj.put("fname", firstNameFaci.toString())
+                        jsonObj.put("lname", lastNameFaci.toString())
+                        jsonObj.put("email", emailFaci.toString())
+                        jsonObj.put("username", usernameFaci.toString())
+                        jsonObj.put("password", passwordFaci.toString())
+                        jsonObj.put("confirm", confirmFaci.toString())
+                        jsonObj.put("birthday", birthdayFaci.toString())
+                        jsonObj.put("gender", genderFaci.toString())
+                        jsonObj.put("prcPhoto", prcPhoto.toString())
+                        jsonObj.put("interests", interestsFaci.toString())
 
                         val specArr = JSONArray()
                         tempSpec.forEach {
@@ -111,14 +111,13 @@ class FacilitatorSpecialization : AppCompatActivity() {
                         })
                     }
                 }
-            }
-
+            fetchSpecialization(addFaci)
         }
     }
 
     fun fetchSpecialization(faciInfo: FaciInfo) {
         /*val url = "http://192.168.1.10:8000/specialization/get"*/
-        val url = "http://192.168.1.8:8000/specialization/get"
+        val url = "http://172.17.2.132:8000/specialization/get"
         /*val url = "http://172.17.2.51:8000/specialization/get"*/
 
         val request = Request.Builder().url(url).build()

@@ -1,4 +1,4 @@
-package mischa.arcillas.com.companion.profile
+package mischa.arcillas.com.companion.profile_facilitator
 
 
 import android.os.Bundle
@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import mischa.arcillas.com.companion.R
 
-class HistoryActivity: Fragment(){
+class ProfileFaciActivity: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_profile, container, false)
+
+
+        return view
     }
 }

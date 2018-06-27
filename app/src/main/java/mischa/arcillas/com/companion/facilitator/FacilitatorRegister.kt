@@ -57,8 +57,8 @@ class FacilitatorRegister : AppCompatActivity() {
 
 
         btnNextFaci.setOnClickListener {
-          /*  if (!(edtFnameFaci.text.isEmpty() && edtLnameFaci.text.isEmpty() && edtEmailFaci.text.isEmpty() && edtUsernameFaci.text.isEmpty() && edtPasswordFaci.text.isEmpty()
-                            && edtConfirmFaci.text.isEmpty() && edtBirthdayFaci.text.isEmpty())) {*/
+            if (!(edtFnameFaci.text.isEmpty() && edtLnameFaci.text.isEmpty() && edtEmailFaci.text.isEmpty() && edtUsernameFaci.text.isEmpty() && edtPasswordFaci.text.isEmpty()
+                            && edtConfirmFaci.text.isEmpty() && edtBirthdayFaci.text.isEmpty())) {
                 val userTypeFaci = "facilitator"
                 val fnameFaci = edtFnameFaci.text.toString()
                 val lnameFaci = edtLnameFaci.text.toString()
@@ -83,9 +83,9 @@ class FacilitatorRegister : AppCompatActivity() {
                 intent.putExtra("prcPhoto", prcPhoto)
 
                 startActivity(intent)
-         /*   } else {
+            } else {
                 Toast.makeText(this, "Fill-up everything", Toast.LENGTH_LONG).show()
-            }*/
+            }
         }
     }
 

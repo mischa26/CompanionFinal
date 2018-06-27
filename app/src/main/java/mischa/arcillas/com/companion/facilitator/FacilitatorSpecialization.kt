@@ -46,8 +46,6 @@ class FacilitatorSpecialization : AppCompatActivity() {
             val interestsFaci = extras.getStringArrayList("interestsFaci")
             val addFaci = FaciInfo("facilitator", firstNameFaci, lastNameFaci, emailFaci, usernameFaci,
                     passwordFaci, confirmFaci, birthdayFaci, genderFaci, prcPhoto, interestsFaci)
-            println(firstNameFaci+" "+lastNameFaci)
-
 
             btnSignUpFaci.setOnClickListener {
                 /*val extras1 = intent.extras

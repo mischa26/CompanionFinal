@@ -8,8 +8,8 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_login.*
 import mischa.arcillas.com.companion.local_db.LocalDB
 import mischa.arcillas.com.companion.local_db.LocalDatabaseHandler
-import mischa.arcillas.com.companion.local_db.UserLocal
 import mischa.arcillas.com.companion.model.Name
+import mischa.arcillas.com.companion.seeker.Home
 import okhttp3.*
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject

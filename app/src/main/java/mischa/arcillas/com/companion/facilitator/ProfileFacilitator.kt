@@ -1,19 +1,21 @@
-package mischa.arcillas.com.companion.profile
+package mischa.arcillas.com.companion.facilitator
 
-import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
-
+import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.os.Bundle
-import android.view.*
-
-import kotlinx.android.synthetic.main.activity_profile.*
+import android.view.Menu
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_profile_facilitator.*
 import mischa.arcillas.com.companion.R
+import mischa.arcillas.com.companion.profile_facilitator.HistoryFaciActivity
+import mischa.arcillas.com.companion.profile_facilitator.JourneyFaciActivity
+import mischa.arcillas.com.companion.profile_facilitator.PlansFaciActivity
+import mischa.arcillas.com.companion.profile_facilitator.ProfileFaciActivity
 
-
-class Profile : AppCompatActivity() {
+class ProfileFacilitator : AppCompatActivity() {
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -78,16 +80,16 @@ class Profile : AppCompatActivity() {
         override fun getItem(position: Int): Fragment? {
             when(position){
                 0 -> {
-                    return ProfileActivity()
+                    return ProfileFaciActivity()
                 }
                 1 -> {
-                    return JourneyActivity()
+                    return JourneyFaciActivity()
                 }
                 2 -> {
-                    return PlansActivity()
+                    return PlansFaciActivity()
                 }
                 3 -> {
-                    return HistoryActivity()
+                    return HistoryFaciActivity()
                 }
                 else -> return null
             }

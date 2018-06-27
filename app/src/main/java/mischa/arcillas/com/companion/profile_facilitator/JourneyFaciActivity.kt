@@ -1,4 +1,4 @@
-package mischa.arcillas.com.companion.profile
+package mischa.arcillas.com.companion.profile_facilitator
 
 
 
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_journey.*
 import mischa.arcillas.com.companion.R
 import java.util.*
 
-class JourneyActivity: Fragment(){
+class JourneyFaciActivity: Fragment(){
 
     var listElements = arrayOf<String>()
 

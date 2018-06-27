@@ -30,11 +30,11 @@
         <activity android:name=".Login" />
         <activity android:name=".seeker.SeekerRegister" />
         <activity
-            android:name=".Home"
+            android:name=".seeker.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".profile.Profile"
+            android:name=".seeker.Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
         <activity android:name=".Choices" />
@@ -42,7 +42,12 @@
         <activity android:name=".seeker.SeekerInterests" />
         <activity android:name=".facilitator.FacilitatorInterests" />
         <activity android:name=".facilitator.FacilitatorSpecialization" />
-        <activity android:name=".local_db.LocalDB"/>
+        <activity android:name=".local_db.LocalDB" />
+        <activity
+            android:name=".facilitator.FacilitatorHome"
+            android:label="@string/title_activity_facilitator_home"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".facilitator.ProfileFacilitator"></activity>
     </application>
 
 </manifest>

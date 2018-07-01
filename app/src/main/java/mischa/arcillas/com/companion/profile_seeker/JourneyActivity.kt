@@ -25,7 +25,7 @@ class JourneyActivity: Fragment(){
         val view = inflater!!.inflate(R.layout.fragment_journey, container, false)
 
         val post = view.findViewById<EditText>(R.id.edtPost)
-        val btnPosted = view.findViewById<Button>(R.id.btnPost)
+        val btnPosted = view.findViewById<Button>(R.id.btnPosts)
         val listPost = view.findViewById<ListView>(R.id.listPost)
 
         listElementsArrayList = ArrayList<String>(Arrays.asList(*listElements))

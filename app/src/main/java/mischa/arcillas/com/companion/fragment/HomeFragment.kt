@@ -8,6 +8,8 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +22,14 @@ import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.talk_circle_row.*
 import mischa.arcillas.com.companion.R
+import mischa.arcillas.com.companion.adapter.PostAdapter
+import mischa.arcillas.com.companion.mode.PostData
 import mischa.arcillas.com.companion.model.FeelingsData
 import okhttp3.*
 import org.jetbrains.anko.runOnUiThread
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(){
 
@@ -39,8 +45,6 @@ class HomeFragment : Fragment(){
 
         var temp: String
         var spin: Spinner
-//        var setadapter: ArrayAdapter<String> = ArrayAdapter(activity, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.feelings))
-//        spinnerFeelings.adapter = setadapter
         spin = view.findViewById(R.id.spinnerFeelings)
         spin.adapter = ArrayAdapter(activity, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.feelings))
         spin.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -52,38 +56,26 @@ class HomeFragment : Fragment(){
             }
         }
         temp = spin.selectedItem.toString()
-       /* fetchFeelings()*/
+
+        var btnPosted: Button
+        btnPosted = view.findViewById(R.id.btnPost)
+
+        btnPosted.setOnClickListener {
+            val pRecylerView = view.findViewById<RecyclerView>(R.id.recyler_view_post)
+            val pLayoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+            val posts = ArrayList<PostData>()
+            val pAdapter = PostAdapter(posts)
+
+            val txtPost = view.findViewById<EditText>(R.id.editPost)
+
+            posts.add(PostData(editPost.text.toString(), temp))
+            txtPost.setText("")
+
+            pRecylerView?.layoutManager = pLayoutManager
+            pRecylerView?.adapter = pAdapter
+        }
         return view
     }
-
-    /*fun fetchFeelings() {
-        val url = "http://192.168.1.10:8000/feelings/get"
-        val request =  Request.Builder().url(url).build()
-        val client = OkHttpClient()
-
-
-        client.newCall(request).enqueue(object : Callback{
-            override fun onFailure(call: Call?, e: IOException?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onResponse(call: Call?, response: Response?) {
-               val body = response?.body()?.string()
-               println(body)
-
-                val gson = GsonBuilder().create()
-
-                val feelings = gson.fromJson(body, FeelingsData::class.java)
-
-                runOnUiThread {
-                    var feelingsSpinner: MutableList<String> = arrayListOf()
-//                    feelingsSpinner.add(feelings)
-
-                }
-            }
-
-        })
-    }*/
 }
 
 

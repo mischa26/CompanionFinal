@@ -18,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/edtPost"
+                android:id="@+id/editPost"
                 android:layout_width="374dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -61,11 +61,13 @@
     </ScrollView>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyler_view_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="142dp" />
+        android:layout_marginTop="142dp"
+        android:layout_alignParentLeft="true" />
 
 
 </RelativeLayout>

@@ -128,10 +128,10 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        val extra = intent.extras
+        /*val extra = intent.extras
         val name_user = extra.getString("name")
 
-        txt_name_user.text = name_user
+        txt_name_user.text = name_user*/
     }
 
     fun Context.toast(message: String) {

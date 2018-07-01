@@ -29,15 +29,15 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*btnLogin2.setOnClickListener {
+        btnLogin2.setOnClickListener {
             val i = Intent(this, Home::class.java)
             startActivity(i)
-        }*/
+        }
 
-        btnLogin2.setOnClickListener {
+       /* btnLogin2.setOnClickListener {
             doAsync {
-                /*val result = "http://192.168.1.10:8000/login"*/
-                /*val result = "http://192.168.1.8:8000/login"*/
+                *//*val result = "http://192.168.1.10:8000/login"*//*
+                *//*val result = "http://192.168.1.8:8000/login"*//*
                 val result = "http://172.17.2.132:8000/login"
                 val mClient = OkHttpClient()
                 val jsonObj = JSONObject()
@@ -85,7 +85,7 @@ class Login : AppCompatActivity() {
                     }
                 })
             }
-        }
+        }*/
     }
 }
 
